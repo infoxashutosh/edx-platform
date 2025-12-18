@@ -287,6 +287,7 @@ class TestDownloadYoutubeSubs(TestYoutubeSubsBase):
 
         self.clear_sub_content(good_youtube_sub)
 
+
 class TestGenerateSrtFromSjson(TestDownloadYoutubeSubs):  # lint-amnesty, pylint: disable=test-inherits-tests
     """Tests for `generate_srt_from_sjson` function."""
 
