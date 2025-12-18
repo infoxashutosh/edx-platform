@@ -28,6 +28,7 @@ from openedx.core.lib.json_utils import EdxJSONEncoder
 from xmodule.assetstore import AssetMetadata
 from xmodule.errortracker import make_error_tracker
 from xmodule.util.misc import get_library_or_course_attribute
+
 from .exceptions import InsufficientSpecificationError, InvalidLocationError
 
 log = logging.getLogger('edx.modulestore')
@@ -1321,19 +1322,26 @@ class ModuleStoreWriteBase(ModuleStoreReadBase, ModuleStoreWrite):
         Creates any necessary other things for the course as a side effect and doesn't return
         anything useful. The real subclass should call this before it returns the course.
         """
-
         # clone a default 'about' overview block as well
         about_location = self.make_course_key(org, course, run).make_usage_key('about', 'overview')
         about_block = XBlock.load_class('about')
-        about_block_dynamic = self.mixologist.mix(about_block)        
-        overview_template = about_block_dynamic.get_template('overview.yaml')
+        about_block_dynamic = self.mixologist.mix(about_block)
+
+        get_template = getattr(about_block_dynamic, "get_template", None)
+        overview_template = (
+            get_template("overview.yaml") if callable(get_template) else {}
+        )
+        
+        definition_data = overview_template.get("data", {})
+        metadata = overview_template.get("metadata", {})
+
         self.create_item(
             user_id,
             about_location.course_key,
             about_location.block_type,
             block_id=about_location.block_id,
-            definition_data={'data': overview_template.get('data')},
-            metadata=overview_template.get('metadata'),
+            definition_data=definition_data,
+            metadata=metadata,
             runtime=runtime,
             continue_version=True,
         )
