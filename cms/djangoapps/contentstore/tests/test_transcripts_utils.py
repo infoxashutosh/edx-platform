@@ -7,7 +7,7 @@ import re
 import tempfile
 import textwrap
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 from uuid import uuid4
 
 import ddt

@@ -21,7 +21,6 @@ from lxml import etree
 from opaque_keys.edx.keys import UsageKeyV2
 from pysrt import SubRipFile, SubRipItem, SubRipTime
 from pysrt.srtexc import Error
-from opaque_keys.edx.locator import LibraryLocatorV2
 
 from openedx.core.djangoapps.xblock.api import get_component_from_usage_key
 from xmodule.contentstore.content import StaticContent
