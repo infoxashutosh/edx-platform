@@ -1331,7 +1331,7 @@ class ModuleStoreWriteBase(ModuleStoreReadBase, ModuleStoreWrite):
         overview_template = (
             get_template("overview.yaml") if callable(get_template) else {}
         )
-        
+
         definition_data = overview_template.get("data", {})
         metadata = overview_template.get("metadata", {})
 
