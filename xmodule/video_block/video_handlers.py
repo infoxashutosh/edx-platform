@@ -282,6 +282,7 @@ class VideoStudentViewHandlers:
 
             try:
                 if is_bumper:
+                    # TODO: We should either move this method to service or merge it with the service get_transcript()
                     content, filename, mimetype = get_transcript_from_contentstore(
                         self,
                         self.transcript_language,

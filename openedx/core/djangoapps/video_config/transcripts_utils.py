@@ -596,6 +596,7 @@ class VideoTranscriptsMixin:
     This is necessary for VideoBlock.
     """
 
+    # TODO: We should move this whole method to the video_config_service.
     def available_translations(self, transcripts, verify_assets=None, is_bumper=False):
         """
         Return a list of language codes for which we have transcripts.
