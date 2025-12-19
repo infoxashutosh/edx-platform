@@ -160,7 +160,11 @@ class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-meth
         # Note: This makes a call to the modulestore, unlike the other
         # fields from CourseSerializer, which get their data
         # from the CourseOverview object in SQL.
-        return CourseDetails.fetch_about_attribute(course_overview.id, 'overview')
+        overview_value = CourseDetails.fetch_about_attribute(course_overview.id, 'overview')
+
+        # Convert None or empty string to empty dict for consistency
+        # empty string means no template data was found
+        return overview_value or {}
 
     def to_representation(self, instance):
         """

@@ -159,8 +159,11 @@ class TestCourseDetailSerializer(TestCourseSerializer):  # lint-amnesty, pylint:
 
         # update the expected_data to include the 'overview' data.
         about_block = XBlock.load_class('about')
-        overview_template = about_block.get_template('overview.yaml')
-        self.expected_data['overview'] = overview_template.get('data')
+        get_template = getattr(about_block, "get_template", None)
+        overview_template = (
+            get_template("overview.yaml") if callable(get_template) else {}
+        )
+        self.expected_data['overview'] = overview_template.get('data', {})
 
     # override test case
     @mock.patch(
