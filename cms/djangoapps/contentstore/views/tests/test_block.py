@@ -2864,7 +2864,6 @@ class TestComponentHandler(TestCase):
         assert mocked_get_aside_from_xblock.called is is_get_aside_called
 
 
-@override_waffle_flag(toggles.LEGACY_STUDIO_PROBLEM_EDITOR, True)
 class TestComponentTemplates(CourseTestCase):
     """
     Unit tests for the generation of the component templates for a course.
