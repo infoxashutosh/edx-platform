@@ -13,7 +13,6 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 from django.urls import reverse
 from django.test.utils import override_settings
-from edx_toggles.toggles.testutils import override_waffle_flag
 from openedx.core.djangoapps.video_config.toggles import PUBLIC_VIDEO_SHARE
 from openedx_events.content_authoring.data import DuplicatedXBlockData
 from openedx_events.content_authoring.signals import XBLOCK_DUPLICATED
@@ -57,7 +56,6 @@ from xmodule.partitions.partitions import (
 from xmodule.partitions.tests.test_partitions import MockPartitionService
 from xmodule.x_module import STUDENT_VIEW, STUDIO_VIEW
 
-from cms.djangoapps.contentstore import toggles
 from cms.djangoapps.contentstore.tests.utils import CourseTestCase
 from cms.djangoapps.contentstore.utils import (
     reverse_course_url,
